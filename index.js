@@ -18,6 +18,7 @@ app.listen(process.env.PORT || 5000, () => {
     console.log('Backend is runing!!');
 });
 
+
 app.use(express.json());
 app.use('/api', authRoute);
 app.use('/api', userRoute);

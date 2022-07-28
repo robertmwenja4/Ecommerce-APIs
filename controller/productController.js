@@ -4,6 +4,7 @@ const Product = require('../models/Product');
 const newProduct = async(req, res) => {
     const newProd = new Product(req.body);
     try {
+        res.header("Access-Control-Allow-Origin", "*");
         const newProducts = await newProd.save();
         res.status(200).json(newProducts);
     } catch (err) {
@@ -13,6 +14,7 @@ const newProduct = async(req, res) => {
 
 const UpdateProduct = async(req, res) => {
     try {
+        res.header("Access-Control-Allow-Origin", "*");
         const updatedProduct = await Product.findByIdAndUpdate(req.params.id, {
             $set: req.body,
         }, { new: true });
@@ -24,6 +26,7 @@ const UpdateProduct = async(req, res) => {
 
 const deleteProduct = async(req, res) => {
     try {
+        res.header("Access-Control-Allow-Origin", "*");
         await Product.findByIdAndDelete(req.params.id);
         res.status(200).json("Product Deleted Successfully!!");
     } catch (err) {
@@ -34,7 +37,9 @@ const deleteProduct = async(req, res) => {
 
 const getProduct = async(req, res) => {
     try {
+        res.header("Access-Control-Allow-Origin", "*");
         const product = await Product.findById(req.params.id);
+
 
         res.status(200).json(product);
     } catch (err) {
@@ -47,6 +52,7 @@ const getAllProducts = async(req, res) => {
     const qNew = req.query.new;
     const qCategory = req.query.category;
     try {
+        res.header("Access-Control-Allow-Origin", "*");
         let products;
         if (qNew) {
             products = await Product.find().sort({ createdAt: -1 }).limit(1);
