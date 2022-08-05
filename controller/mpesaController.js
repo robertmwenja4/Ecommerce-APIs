@@ -48,6 +48,7 @@ const stkPush = (req, res) => {
         let password = Buffer.from(shortCode + process.env.PASS_KEY + today).toString("base64");
 
         request({
+
                 url: url,
                 method: "POST",
                 headers: {
@@ -62,7 +63,7 @@ const stkPush = (req, res) => {
                     "PartyA": req.body.PhoneNumber,
                     "PartyB": shortCode,
                     "PhoneNumber": req.body.PhoneNumber,
-                    "CallBackURL": "https://b812-197-156-137-128.ngrok.io/api/mpesa/callback",
+                    "CallBackURL": "http://localhost:5000/api/mpesa/callback",
                     "AccountReference": "SHOPIFY LIMITED",
                     "TransactionDesc": "Payment of Items"
                 }
@@ -71,6 +72,7 @@ const stkPush = (req, res) => {
                 if (err) {
                     console.log(err);
                 } else {
+                    res.header("Access-Control-Allow-Origin", "*");
                     res.status(200).json(body);
                 }
             }
@@ -80,6 +82,7 @@ const stkPush = (req, res) => {
 }
 
 const mpeseCallback = async(req, res) => {
+    res.header("Access-Control-Allow-Origin", "*");
     console.log("---------RESPONSE-----------");
     let response = await req.body;
     console.log(response);

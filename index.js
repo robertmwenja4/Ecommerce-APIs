@@ -8,6 +8,7 @@ const productRoute = require('./routes/productRoute');
 const orderRoute = require('./routes/orderRoute');
 const cartRoute = require('./routes/cartRoute');
 const mpesaRoute = require('./routes/mpesaRoute');
+const cors = require('cors');
 dotenv.config();
 
 const dbUrl = process.env.MONGO_URL;
@@ -19,6 +20,7 @@ app.listen(process.env.PORT || 5000, () => {
 });
 
 
+app.use(cors());
 app.use(express.json());
 app.use('/api', authRoute);
 app.use('/api', userRoute);
