@@ -63,7 +63,7 @@ const stkPush = (req, res) => {
                     "PartyA": req.body.PhoneNumber,
                     "PartyB": shortCode,
                     "PhoneNumber": req.body.PhoneNumber,
-                    "CallBackURL": "http://localhost:5000/api/mpesa/callback",
+                    "CallBackURL": "https://81e2-154-123-81-131.ngrok.io/api/mpesa/callback",
                     "AccountReference": "SHOPIFY LIMITED",
                     "TransactionDesc": "Payment of Items"
                 }
@@ -72,7 +72,6 @@ const stkPush = (req, res) => {
                 if (err) {
                     console.log(err);
                 } else {
-                    res.header("Access-Control-Allow-Origin", "*");
                     res.status(200).json(body);
                 }
             }
@@ -82,7 +81,6 @@ const stkPush = (req, res) => {
 }
 
 const mpeseCallback = async(req, res) => {
-    res.header("Access-Control-Allow-Origin", "*");
     console.log("---------RESPONSE-----------");
     let response = await req.body;
     console.log(response);
